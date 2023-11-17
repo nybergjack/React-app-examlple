@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "React-app-examlple",
-    "slug": "React-app-examlple",
+    "name": "New-X",
+    "slug": "New-X",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,22 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.djnoodle.NewX"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cc5332b9-10f9-41ef-91a4-e4e209335cba"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/cc5332b9-10f9-41ef-91a4-e4e209335cba"
     }
   }
 }

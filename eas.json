@@ -1,0 +1,21 @@
+{
+    "cli": {
+        "version": ">=1.0.0"
+    },
+    "build": {
+        "react-app-examlple": {
+            "android": {
+                "buildType": "apk"
+            }
+        },
+        "react-app-examlple2": {
+            "android": {
+                "gradleCommand": ":app:assembleRelease"
+            }
+        },
+        "react-app-examlple3": {
+            "developmentClient": true
+        },
+        "production": {}
+    }
+}
