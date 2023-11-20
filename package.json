@@ -1,41 +1,45 @@
 {
-  "name": "react-app-examlple",
-  "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "build-android": "eas build -p android --profile react-app-examlple"
-  },
-  "dependencies": {
-    "@expo/webpack-config": "^19.0.0",
-    "@react-navigation/bottom-tabs": "^6.5.11",
-    "@react-navigation/native": "^6.1.9",
-    "@react-navigation/native-stack": "^6.9.17",
-    "@react-navigation/stack": "^6.3.20",
-    "@reduxjs/toolkit": "^1.9.7",
-    "@rneui/base": "^4.0.0-rc.7",
-    "@rneui/themed": "^4.0.0-rc.8",
-    "expo": "~49.0.15",
-    "expo-status-bar": "~1.6.0",
-    "firebase": "^10.5.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native": "0.72.6",
-    "react-native-safe-area-context": "^4.6.3",
-    "react-native-screens": "~3.22.0",
-    "react-native-toast-notifications": "^3.4.0",
-    "react-native-vector-icons": "^10.0.2",
-    "react-native-web": "~0.19.6",
-    "react-redux": "^8.1.3",
-    "expo-updates": "~0.18.17"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@types/react": "~18.2.14",
-    "typescript": "^5.1.3"
-  },
-  "private": true
+    "name": "react-app-examlple",
+    "version": "1.0.0",
+    "main": "node_modules/expo/AppEntry.js",
+    "scripts": {
+        "start": "expo start",
+        "android": "expo start --android",
+        "ios": "expo start --ios",
+        "web": "expo start --web",
+        "build-android": "eas build -p android --profile react-app-examlple",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "@expo/webpack-config": "^19.0.0",
+        "@react-navigation/bottom-tabs": "^6.5.11",
+        "@react-navigation/native": "^6.1.9",
+        "@react-navigation/native-stack": "^6.9.17",
+        "@react-navigation/stack": "^6.3.20",
+        "@reduxjs/toolkit": "^1.9.7",
+        "@rneui/base": "^4.0.0-rc.7",
+        "@rneui/themed": "^4.0.0-rc.8",
+        "expo": "~49.0.15",
+        "expo-status-bar": "~1.6.0",
+        "expo-updates": "~0.18.17",
+        "firebase": "^10.5.2",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-native": "0.72.6",
+        "react-native-safe-area-context": "^4.6.3",
+        "react-native-screens": "~3.22.0",
+        "react-native-toast-notifications": "^3.4.0",
+        "react-native-vector-icons": "^10.0.2",
+        "react-native-web": "~0.19.6",
+        "react-redux": "^8.1.3"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.20.0",
+        "@types/react": "~18.2.14",
+        "eslint": "^8.54.0",
+        "eslint-config-universe": "^12.0.0",
+        "prettier": "^3.1.0",
+        "typescript": "^5.1.3"
+    },
+    "private": true
 }

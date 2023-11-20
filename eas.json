@@ -2,6 +2,10 @@
     "cli": {
         "version": ">=1.0.0"
     },
+    "env": {
+        "QT_QPA_PLATFORM": "xcb",
+        "_JAVA_AWT_WM_NONREPARENTING": "1"
+    },
     "build": {
         "react-app-examlple": {
             "android": {
