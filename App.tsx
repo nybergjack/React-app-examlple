@@ -5,11 +5,13 @@ import { StyleSheet, Text, View } from "react-native";
 import { ToastProvider } from "react-native-toast-notifications";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Provider, useSelector } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
+import { Settings } from "./src/screens/Settings/Settings";
 import { UserForm } from "./src/screens/UserForm/UserForm";
 import { UserInfo } from "./src/screens/UserInfo/UserInfo";
 import UserList from "./src/screens/UserList/Userlist";
-import { store } from "./src/store/store";
+import { persistor, store } from "./src/store/store";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -73,6 +75,19 @@ const NavigationWrapper = () => {
             }}
           />
         ) : undefined}
+        <Tab.Screen
+          name="Settings"
+          component={Settings}
+          options={{
+            tabBarIcon: (tabInfo) => (
+              <Icon
+                name="gear"
+                size={25}
+                color={tabInfo.focused ? "#006600" : "#8e8e93"}
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -82,7 +97,9 @@ export default function App() {
   return (
     <ToastProvider>
       <Provider store={store}>
-        <NavigationWrapper />
+        <PersistGate loading={null} persistor={persistor}>
+          <NavigationWrapper />
+        </PersistGate>
       </Provider>
     </ToastProvider>
   );

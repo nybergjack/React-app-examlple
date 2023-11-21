@@ -1,5 +1,6 @@
 import { Button, Input } from "@rneui/themed";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   View,
   Text,
@@ -13,6 +14,7 @@ import { useCreateUserMutation } from "../../store/api/usersApi";
 
 export const UserForm = (props) => {
   const { navigation } = props;
+  const { t } = useTranslation();
 
   const toast = useToast();
   const lastNameRef = useRef(null);
@@ -60,7 +62,7 @@ export const UserForm = (props) => {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.parentContainer}>
         <View style={styles.container}>
-          <Text>Create account</Text>
+          <Text>Skapa konto</Text>
 
           <Input
             placeholder="Firstname"
@@ -89,7 +91,8 @@ export const UserForm = (props) => {
           />
 
           <Button
-            title="Create user"
+            //title="Create user"
+            title={t("createUser")}
             onPress={() => handleSubmit()}
             disabled={isLoading}
             loading={isLoading}
