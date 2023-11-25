@@ -2,12 +2,18 @@ import { Button, Text } from "@rneui/themed";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
+import {
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} from "../../store/api/usersApi";
 import { logIn, logOut } from "../../store/slices/authSlice";
 
 export const UserInfo = ({ route, navigation }) => {
   const loggedInAs = useSelector((state: any) => state.auth.loggedInAs);
   const user = route?.params?.user || loggedInAs;
   const dispatch = useDispatch();
+  const [deleteUser] = useDeleteUserMutation();
+  const [updateUser] = useUpdateUserMutation();
 
   return (
     <View style={styles.container}>
@@ -26,6 +32,9 @@ export const UserInfo = ({ route, navigation }) => {
         ) : (
           <>
             <Button onPress={() => dispatch(logIn(user))} title="Logga in" />
+            <Button onPress={() => deleteUser(user.id)}>
+              Ta bort amvändare
+            </Button>
           </>
         )}
       </View>

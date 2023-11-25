@@ -7,6 +7,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { Provider, useSelector } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { PostForm } from "./src/screens/PostForm/PostForm";
+import PostList from "./src/screens/PostList/PostList";
 import { Settings } from "./src/screens/Settings/Settings";
 import { UserForm } from "./src/screens/UserForm/UserForm";
 import { UserInfo } from "./src/screens/UserInfo/UserInfo";
@@ -45,11 +47,12 @@ const NavigationWrapper = () => {
             ),
           }}
         />
+
         <Tab.Screen
           name="UserForm"
           component={UserForm}
           options={{
-            title: "UserForm",
+            title: "User Form",
             tabBarIcon: (tabInfo) => (
               <Icon
                 name="user-plus"
@@ -59,6 +62,35 @@ const NavigationWrapper = () => {
             ),
           }}
         />
+        <Tab.Screen
+          name="Posts"
+          component={PostList}
+          options={{
+            tabBarIcon: (tabInfo) => (
+              <Icon
+                name="clipboard"
+                size={25}
+                color={tabInfo.focused ? "#006600" : "#8e8e93"}
+              />
+            ),
+          }}
+        />
+        {loggedInAs ? (
+          <Tab.Screen
+            name="PostForm"
+            component={PostForm}
+            options={{
+              title: "Post Form",
+              tabBarIcon: (tabInfo) => (
+                <Icon
+                  name="plus"
+                  size={25}
+                  color={tabInfo.focused ? "#006600" : "#8e8e93"}
+                />
+              ),
+            }}
+          />
+        ) : undefined}
         {loggedInAs ? (
           <Tab.Screen
             name="UserInfo"

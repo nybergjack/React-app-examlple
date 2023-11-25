@@ -1,54 +1,40 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {
   addDoc,
-  collection,
-  deleteDoc,
   doc,
+  deleteDoc,
+  collection,
   getDocs,
   updateDoc,
 } from "firebase/firestore";
 
 import { db } from "../../../firebase-config";
 
-const firebaseBaseQuery = async ({
-  url,
-  method,
-  body,
-  id,
-}: {
-  baseUrl?: string;
-  url: string;
-  method: string;
-  body?: any;
-  id?: string;
-}) => {
+const firebaseBaseQuery = async ({ baseUrl, url, method, body }) => {
   switch (method) {
     case "GET": {
       const snapshot = await getDocs(collection(db, url));
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       return { data };
     }
+
     case "POST": {
       const docRef = await addDoc(collection(db, url), body);
       return { data: { id: docRef.id, ...body } };
     }
+
     case "DELETE": {
-      if (!id) {
-        throw new Error("Id måste skickas in");
-      }
-      await deleteDoc(doc(db, url, id));
-      return { data: { id } };
+      const docDelRef = await deleteDoc(doc(db, url, body));
+      return { data: { id: docDelRef } };
     }
+
     case "PUT": {
-      if (!id || !body) {
-        throw new Error("Id och namn måste skickas in.");
-      }
-      await updateDoc(doc(db, url, id), body);
-      return { data: body };
+      await updateDoc(doc(db, url, body.id), body);
+      return { data: { ...body } };
     }
-    default: {
+
+    default:
       throw new Error(`Unhandled method ${method}`);
-    }
   }
 };
 
@@ -57,46 +43,50 @@ export const usersApi = createApi({
   baseQuery: firebaseBaseQuery,
   tagTypes: ["users"],
   endpoints: (builder) => ({
+    // För att skapa en ny user. Anropas såhär createUser({ user: { firstName: firstName, lastName: lastName }})
     createUser: builder.mutation({
       query: ({ user }) => ({
-        method: "POST",
+        baseUrl: "",
         url: "users",
+        method: "POST",
         body: user,
       }),
       invalidatesTags: ["users"],
     }),
+    // För att hämta alla befintliga users
     getUsers: builder.query({
-      query: ({}) => ({
-        method: "GET",
+      query: () => ({
         baseUrl: "",
         url: "users",
+        method: "GET",
         body: "",
       }),
       providesTags: ["users"],
     }),
-
+    // För att radera en user baserat på id. Anropas såhär: deleteUser(id)
     deleteUser: builder.mutation({
       query: (id) => ({
-        method: "DELETE",
+        baseUrl: "",
         url: "users",
-        id,
+        method: "DELETE",
+        body: id,
       }),
+      invalidatesTags: ["users"],
     }),
-
+    // För att uppdatera en user. Anropas såhär updateUser({ user: { id: user.id, firstName: firstName, lastName: lastName }})
     updateUser: builder.mutation({
-      query: ({ user }) => {
-        return {
-          method: "PUT",
-          baseUrl: "",
-          url: "users",
-          body: user,
-          id: user.id,
-        };
-      },
+      query: ({ user }) => ({
+        baseUrl: "",
+        url: "users",
+        method: "PUT",
+        body: user,
+      }),
+      invalidatesTags: ["users"],
     }),
   }),
 });
 
+// Exportera våra Queries och Mutations här.
 export const {
   useCreateUserMutation,
   useGetUsersQuery,
